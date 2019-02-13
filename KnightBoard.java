@@ -4,16 +4,34 @@ public class KnightBoard {
   @throws IllegalArgumentException when either parameter is negative.
   public KnightBoard(int startingRows,int startingCols) {
     board = new int[startingRows][startingCols];
+    removeNull();
   }
 
-}
+  public void removeNull() {
+    for (int a = 0; a < board.length; a++) {
+      for (int b = 0; b < board[0].length; b++) {
+	       board[a][b] = 0;
+      }
+    }
+  }
 
-KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
+  public String toString(){
+    String s = "";
+    for (int a = 0; a < board.length; a++) {
+      for (int b = 0; b < board[0].length; b++) {
+        if (board[a][b] == 0) {
+          s += "_";
+        }
+      }
+      s += "\n";
+    }
+    return s;
+  }
 
-@throws IllegalArgumentException when either parameter is negative.
-public KnightBoard(int startingRows,int startingCols)
 
-    Initialize the board to the correct size and make them all 0's
+
+//KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
+
 
 
 public String toString()
