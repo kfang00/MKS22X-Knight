@@ -1,3 +1,13 @@
+public class KnightBoard {
+  private int[][]board;
+
+  @throws IllegalArgumentException when either parameter is negative.
+  public KnightBoard(int startingRows,int startingCols) {
+    board = new int[startingRows][startingCols];
+  }
+
+}
+
 KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
 
 @throws IllegalArgumentException when either parameter is negative.
