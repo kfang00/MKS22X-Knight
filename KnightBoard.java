@@ -60,6 +60,15 @@ public class KnightBoard {
     if ((startingRows < 0) || (startingCols < 0) || (startingRows >= board.length) || (startingCols >= board[0].length)) {
       throw new IllegalArgumentException();
     }
+    return solveH(startingRow, startingCol);
+  }
+
+  public boolean solveH(int startingRow, int startingCol, int curNum) {
+    if (curNum == ((startingRow * startingCol) + 1) {
+      return true;
+    }
+    return solve
+
   }
   public static void main(String[] args) {
     System.out.println();
