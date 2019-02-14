@@ -3,6 +3,9 @@ public class KnightBoard {
 
   @throws IllegalArgumentException when either parameter is negative.
   public KnightBoard(int startingRows,int startingCols) {
+    if ((startingRows <= 0) || (startingCols <= 0)) {
+      throw new IllegalArgumentException();
+    }
     board = new int[startingRows][startingCols];
     removeNull();
   }
@@ -39,6 +42,25 @@ public class KnightBoard {
     return s;
   }
 
+  private boolean checkZero() {
+    for (int a = 0; a < board.length; a++) {
+      for (int b = 0; b < board[0].length; b++) {
+        if (board[a][b] != 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public boolean solve(int startingRow, int startingCol) {
+    if (!checkZero()) {
+      throw new IllegalStateException();
+    }
+    if ((startingRows < 0) || (startingCols < 0) || (startingRows >= board.length) || (startingCols >= board[0].length)) {
+      throw new IllegalArgumentException();
+    }
+  }
   public static void main(String[] args) {
     System.out.println();
   }
@@ -47,13 +69,6 @@ public class KnightBoard {
 
 //KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
 
-
-
-public String toString()
-see format for toString below
-blank boards display 0's as underscores
-you get a blank board if you never called solve or
-when there is no solution
 
 @throws IllegalStateException when the board contains non-zero values.
 @throws IllegalArgumentException when either parameter is negative
