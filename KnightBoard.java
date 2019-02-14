@@ -19,6 +19,9 @@ public class KnightBoard {
     String s = "";
     for (int a = 0; a < board.length; a++) {
       for (int b = 0; b < board[0].length; b++) {
+        if (board[a][b] == 0) {
+          s += "  _";
+        }
         if (board.length * board[0].length >= 10) {
           s += "  " + board[a][b];
         }
