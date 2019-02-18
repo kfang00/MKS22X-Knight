@@ -25,7 +25,7 @@ public class KnightBoard {
         if (board[a][b] == 0) {
           s += "  _";
         }
-        if (board.length * board[0].length >= 10) {
+        if (board.length * board[0].length < 10) {
           s += "  " + board[a][b];
         }
         else {
@@ -63,17 +63,52 @@ public class KnightBoard {
     return solveH(startingRow, startingCol);
   }
 
-  public boolean solveH(int startingRow, int startingCol, int curNum) {
-    if (curNum == ((startingRow * startingCol) + 1) {
+  public boolean solveH(int staRow, int staCol, int level) {
+    if (curNum == ((staRow * staCol) + 1) {
       return true;
     }
-    return solve
+    if (placeKnight(staRow, staCol, level) {
+      if (solveH(staRow + 2, staCol + 1, level + 1) {
+	return true;
+      }
+      if (solveH(staRow + 2, staCol - 1, level + 1) {
+	return true;
+      }
+      if (solveH(staRow + 1, staCol + 2, level + 1) {
+	return true;
+      }
+      if (solveH(staRow - 1, staCol + 2, level + 1) {
+	return true;
+      }
+      if (solveH(staRow - 2, staCol + 1, level + 1) {
+	return true;
+      }
+      if (solveH(staRow - 2, staCol - 1, level + 1) {
+	return true;
+      }
+      if (solveH(staRow + 1, staCol - 2, level + 1) {
+	return true;
+      }
+      if (solveH(staRow - 1, staCol - 2, level + 1) {
+	return true;
+      }
+    }
+    
+
+    
 
   }
+  pubic boolean placeKnight(int staRow, int staCol, int level) {
+    if (board[staRow][staCol] != 0) {
+      return false;
+    }
+    board[staRow][staCol] = level;
+    return true;
+  }
+
   public static void main(String[] args) {
     System.out.println();
   }
-
 
 
 //KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
