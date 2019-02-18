@@ -60,45 +60,44 @@ public class KnightBoard {
     if ((startingRows < 0) || (startingCols < 0) || (startingRows >= board.length) || (startingCols >= board[0].length)) {
       throw new IllegalArgumentException();
     }
-    return solveH(startingRow, startingCol);
+    return solveH(startingRow, startingCol, 1);
   }
 
   public boolean solveH(int staRow, int staCol, int level) {
-    if (curNum == ((staRow * staCol) + 1) {
+    if (curNum == ((staRow * staCol) + 1)) {
       return true;
     }
-    if (placeKnight(staRow, staCol, level) {
-      if (solveH(staRow + 2, staCol + 1, level + 1) {
+    if (placeKnight(staRow, staCol, level)) {
+      if (solveH(staRow + 2, staCol + 1, level + 1)) {
 	return true;
       }
-      if (solveH(staRow + 2, staCol - 1, level + 1) {
+      if (solveH(staRow + 2, staCol - 1, level + 1)) {
 	return true;
       }
-      if (solveH(staRow + 1, staCol + 2, level + 1) {
+      if (solveH(staRow + 1, staCol + 2, level + 1)) {
 	return true;
       }
-      if (solveH(staRow - 1, staCol + 2, level + 1) {
+      if (solveH(staRow - 1, staCol + 2, level + 1)) {
 	return true;
       }
-      if (solveH(staRow - 2, staCol + 1, level + 1) {
+      if (solveH(staRow - 2, staCol + 1, level + 1)) {
 	return true;
       }
-      if (solveH(staRow - 2, staCol - 1, level + 1) {
+      if (solveH(staRow - 2, staCol - 1, level + 1)) {
 	return true;
       }
-      if (solveH(staRow + 1, staCol - 2, level + 1) {
+      if (solveH(staRow + 1, staCol - 2, level + 1)) {
 	return true;
       }
-      if (solveH(staRow - 1, staCol - 2, level + 1) {
+      if (solveH(staRow - 1, staCol - 2, level + 1)) {
 	return true;
       }
+      removeKnight(staRow, staCol);
     }
-    
-
-    
-
+    return false;
   }
-  pubic boolean placeKnight(int staRow, int staCol, int level) {
+
+  public boolean placeKnight(int staRow, int staCol, int level) {
     if (board[staRow][staCol] != 0) {
       return false;
     }
@@ -106,24 +105,18 @@ public class KnightBoard {
     return true;
   }
 
+  public boolean removeKnight(int staRow, int staCol) {
+    if (board[staRow][staCol] != 0) {
+      board[staRow][staCol] = 0;
+      return true;
+    }
+    return false;
+  }
+
   public static void main(String[] args) {
-    System.out.println();
+    KnightBoard k = new KnightBoard(5, 5);
+    System.out.println(k.solve(0, 0));
   }
 
 
-//KnightBoard has 3 public methods and a constructor, a private helper is needed as well.
-
-
-@throws IllegalStateException when the board contains non-zero values.
-@throws IllegalArgumentException when either parameter is negative
- or out of bounds.
-public boolean solve(int startingRow, int startingCol)
-
-@throws IllegalStateException when the board contains non-zero values.
-@throws IllegalArgumentException when either parameter is negative
- or out of bounds.
-public int countSolutions(int startingRow, int startingCol)
-
-Suggestion:
-private boolean solveH(int row ,int col, int level)
-// level is the # of the knight
+}
