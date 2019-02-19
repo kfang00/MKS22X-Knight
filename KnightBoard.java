@@ -124,44 +124,36 @@ public class KnightBoard {
     if ((startingRow < 0) || (startingCol < 0) || (startingRow >= board.length) || (startingCol >= board[0].length)) {
       throw new IllegalArgumentException();
     }
-    return countH(startingRow, startingCol);
+    if ((startingRow > board.length) || (startingCol > board[0].length)) {
+      return countH(startingRow, startingCol, 1);
+    }
+    for (int a = startingRow; a < board.length; a++) {
+      for (int b = startingCol; b < board[0].length; b++) {
+	count = count + count(a, b);
+      }
+    }
+    return count;
   }
 
-  public int countH(int staRow, int staCol) {
+  public int countH(int staRow, int staCol, int level) {
     if (level == ((board.length * board[0].length) + 1)) {
-      return true;
+      return 1;
     }
     if ((staRow >= board.length) || (staCol >= board[0].length) || (staRow < 0) || (staCol < 0)) {
-      return false;
+      return 0;
     }
     if (placeKnight(staRow, staCol, level)) {
-      if (solveH(staRow + 2, staCol + 1, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow + 2, staCol - 1, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow + 1, staCol + 2, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow - 1, staCol + 2, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow - 2, staCol + 1, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow - 2, staCol - 1, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow + 1, staCol - 2, level + 1)) {
-	return true;
-      }
-      if (solveH(staRow - 1, staCol - 2, level + 1)) {
-	return true;
-      }
+      count = count + countH(staRow + 2, staCol + 1, level + 1);
+      count = count + countH(staRow + 2, staCol - 1, level + 1);
+      count = count + countH(staRow + 1, staCol + 2, level + 1);
+      count = count + countH(staRow - 1, staCol + 2, level + 1);
+      count = count + countH(staRow - 2, staCol + 1, level + 1);
+      count = count + countH(staRow - 2, staCol - 1, level + 1);
+      count = count + countH(staRow + 1, staCol - 2, level + 1);
+      count = count + countH(staRow - 1, staCol - 2, level + 1);
       removeKnight(staRow, staCol);
     }
-    return false;
+    return count;
   }
 
   public static void main(String[] args) {
