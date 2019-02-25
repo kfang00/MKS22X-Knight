@@ -124,15 +124,15 @@ public class KnightBoard {
     if ((startingRow < 0) || (startingCol < 0) || (startingRow >= board.length) || (startingCol >= board[0].length)) {
       throw new IllegalArgumentException();
     }
-    if ((startingRow > board.length) || (startingCol > board[0].length)) {
-      return countH(startingRow, startingCol, 1);
-    }
-    for (int a = startingRow; a < board.length; a++) {
-      for (int b = startingCol; b < board[0].length; b++) {
-	count = count + count(a, b);
-      }
-    }
-    return count;
+    //if ((startingRow > board.length) || (startingCol > board[0].length)) {
+    //  return countH(startingRow, startingCol, 1);
+    //}
+    //for (int a = startingRow; a < board.length; a++) {
+    // for (int b = startingCol; b < board[0].length; b++) {
+	//count = count + countSolutions(a, b);
+      //}
+    //}
+    return countH(startingRow, startingCol, 1) / 8;
   }
 
   public int countH(int staRow, int staCol, int level) {
@@ -142,6 +142,7 @@ public class KnightBoard {
     if ((staRow >= board.length) || (staCol >= board[0].length) || (staRow < 0) || (staCol < 0)) {
       return 0;
     }
+    count = 0;
     if (placeKnight(staRow, staCol, level)) {
       count = count + countH(staRow + 2, staCol + 1, level + 1);
       count = count + countH(staRow + 2, staCol - 1, level + 1);
@@ -164,8 +165,8 @@ public class KnightBoard {
     KnightBoard a = new KnightBoard(6, 6);
     System.out.println(a.solve(0, 0));
     System.out.println(a);
-    KnightBoard ab = new KnightBoard(6, 7);
-    System.out.println(ab.solve(0, 0));
+    KnightBoard ab = new KnightBoard(6, 6);
+    System.out.println(ab.countSolutions(0, 0));
     System.out.println(ab);
   }
 
