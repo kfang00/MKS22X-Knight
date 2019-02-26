@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class KnightBoard {
   private int[][]board;
   private int count;
+  private ArrayList<Arrays> coor;
 
   //@throws IllegalArgumentException when either parameter is negative;
   public KnightBoard(int startingRows,int startingCols) {
@@ -8,9 +12,14 @@ public class KnightBoard {
       throw new IllegalArgumentException();
     }
     board = new int[startingRows][startingCols];
+    coor = new ArrayList<Arrays>(8);
     removeNull();
   }
 
+  public void outgoingMoves() {
+    String s = "";
+
+  }
   public void removeNull() {
     for (int a = 0; a < board.length; a++) {
       for (int b = 0; b < board[0].length; b++) {
@@ -52,6 +61,10 @@ public class KnightBoard {
       }
     }
     return true;
+  }
+
+  pubilc boolean findCoor() {
+
   }
 
   public boolean solve(int startingRow, int startingCol) {
