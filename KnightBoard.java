@@ -5,7 +5,7 @@ public class KnightBoard {
   private int[][]board;
   private int[][]moves;
   private int count;
-  private ArrayList<Integer> coor, uncoor;
+  private ArrayList<Integer> coor, uncoor, ogm;
 
   //@throws IllegalArgumentException when either parameter is negative;
   public KnightBoard(int startingRows,int startingCols) {
@@ -16,6 +16,7 @@ public class KnightBoard {
     moves = new int[startingRows][startingCols];
     coor = new ArrayList<Integer>(16);
     uncoor = new ArrayList<Integer>(16);
+    ogm = new ArrayList<Integer>(8);
     removeNull(board);
     removeNull(moves);
     if ((startingRows > 5) || (startingCols > 5)) {
@@ -103,10 +104,10 @@ public class KnightBoard {
   public void findCoor(int r, int c) {
     int index = 0;
     int index1 = 0;
-    for (int a = -2; a < 3; a += 4) {
+    for (int a = -2; a < 3; a += 4) { 
       for (int b = -1; b < 2; b += 2) {
-        if (!((r + a >= board.length) || (c + b >= board[0].length) || (r + a < 0) || (c + b < 0))) {
-	  if (board[r + a][c + b] == 0) {
+        if (!((r + a >= board.length) || (c + b >= board[0].length) || (r + a < 0) || (c + b < 0))) { //out of bounds
+	  if (board[r + a][c + b] == 0) { // is this space available?
 	    coor.set(index, r + a);
 	    index += 1;
 	    coor.set(index, c + b);
@@ -119,8 +120,8 @@ public class KnightBoard {
 	    index += 1;
 	  }
         }
-        if (!((r + b >= board.length) || (c + a >= board[0].length) || (r + b < 0) || (c + a < 0))) {
-	  if (board[r + b][c + a] == 0) {
+        if (!((r + b >= board.length) || (c + a >= board[0].length) || (r + b < 0) || (c + a < 0))) { //out of bounds
+	  if (board[r + b][c + a] == 0) { // is this space available?
 	    coor.set(index, r + b);
 	    index += 1;
 	    coor.set(index, c + a);
@@ -135,6 +136,21 @@ public class KnightBoard {
         }
       }
     }
+  }
+
+  public int ogmIndex() {
+    int index = 0;
+    int smallest = 10;
+    int idxf = 1;
+    for (int a = 0; a < coor.size(); a += 2) { 
+      ogm.set(index, moves[coor.get(a)][coor.get(a + 1)])
+      index += 1;
+      if (moves[coor.get(a)][coor.get(a + 1)] < smallest) {
+	smallest = moves[coor.get(a)][coor.get(a + 1)];
+        idxf = a;
+      }
+    }
+
   }
 
   public boolean solve(int startingRow, int startingCol) {
