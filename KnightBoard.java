@@ -5,7 +5,7 @@ public class KnightBoard {
   private int[][]board;
   private int[][]moves;
   private int count;
-  private ArrayList<Arrays> coor;
+  private ArrayList<Integer> coor, uncoor;
 
   //@throws IllegalArgumentException when either parameter is negative;
   public KnightBoard(int startingRows,int startingCols) {
@@ -14,10 +14,13 @@ public class KnightBoard {
     }
     board = new int[startingRows][startingCols];
     moves = new int[startingRows][startingCols];
-    coor = new ArrayList<Arrays>(8);
+    coor = new ArrayList<Integer>(16);
+    uncoor = new ArrayList<Integer>(16);
     removeNull(board);
     removeNull(moves);
-    outgoingMoves();
+    if ((startingRows > 5) || (startingCols > 5)) {
+      outgoingMoves();
+    }
   }
 
   public void outgoingMoves() {
@@ -97,9 +100,42 @@ public class KnightBoard {
     return true;
   }
 
-  //pubilc void findCoor() {
-
-//  }
+  public void findCoor(int r, int c) {
+    int index = 0;
+    int index1 = 0;
+    for (int a = -2; a < 3; a += 4) {
+      for (int b = -1; b < 2; b += 2) {
+        if (!((r + a >= board.length) || (c + b >= board[0].length) || (r + a < 0) || (c + b < 0))) {
+	  if (board[r + a][c + b] == 0) {
+	    coor.set(index, r + a);
+	    index += 1;
+	    coor.set(index, c + b);
+	    index += 1;
+	  }
+	  else {
+	    uncoor.set(index1, r + a);
+	    index += 1;
+	    uncoor.set(index1, c + b);
+	    index += 1;
+	  }
+        }
+        if (!((r + b >= board.length) || (c + a >= board[0].length) || (r + b < 0) || (c + a < 0))) {
+	  if (board[r + b][c + a] == 0) {
+	    coor.set(index, r + b);
+	    index += 1;
+	    coor.set(index, c + a);
+	    index += 1;
+	  }
+	  else {
+	    uncoor.set(index1, r + b);
+	    index += 1;
+	    uncoor.set(index1, c + a);
+	    index += 1;
+	  }
+        }
+      }
+    }
+  }
 
   public boolean solve(int startingRow, int startingCol) {
     if (!checkZero()) {
@@ -209,7 +245,7 @@ public class KnightBoard {
     System.out.println(k.toStringC());
     System.out.println(k.solve(0, 0));
     System.out.println(k);
-    KnightBoard a = new KnightBoard(6, 6);
+    KnightBoard a = new KnightBoard(39, 39);
     System.out.println(a.solve(0, 0));
     System.out.println(a);
     //KnightBoard ab = new KnightBoard(6, 6);
