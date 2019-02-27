@@ -160,7 +160,7 @@ public class KnightBoard {
     if ((startingRow < 0) || (startingCol < 0) || (startingRow >= board.length) || (startingCol >= board[0].length)) {
       throw new IllegalArgumentException();
     }
-    if ((startingRows > 5) || (startingCols > 5)) {
+    if ((startingRow > 5) || (startingCol > 5)) {
       return solveO(startingRow, startingCol, 1);
     }
     return solveH(startingRow, startingCol, 1);
@@ -226,10 +226,10 @@ public class KnightBoard {
       return false;
     }
     for (int a = 0; a < coor.size(); a += 2) { 
-      moves[coor.get(a)][coor.get(a + 1)]) = moves[coor.get(a)][coor.get(a + 1)]) - 1;
+      moves[coor.get(a)][coor.get(a + 1)] = moves[coor.get(a)][coor.get(a + 1)] - 1;
     }
     for (int a = 0; a < uncoor.size(); a += 2) { 
-      moves[uncoor.get(a)][uncoor.get(a + 1)]) = moves[uncoor.get(a)][uncoor.get(a + 1)]) - 1;
+      moves[uncoor.get(a)][uncoor.get(a + 1)] = moves[uncoor.get(a)][uncoor.get(a + 1)] - 1;
     }
     board[staRow][staCol] = level;
     return true;
@@ -239,10 +239,10 @@ public class KnightBoard {
     if (board[staRow][staCol] != 0) {
       board[staRow][staCol] = 0;
       for (int a = 0; a < coor.size(); a += 2) { 
-        moves[coor.get(a)][coor.get(a + 1)]) = moves[coor.get(a)][coor.get(a + 1)]) + 1;
+        moves[coor.get(a)][coor.get(a + 1)] = moves[coor.get(a)][coor.get(a + 1)] + 1;
       }
       for (int a = 0; a < uncoor.size(); a += 2) { 
-        moves[uncoor.get(a)][uncoor.get(a + 1)]) = moves[uncoor.get(a)][uncoor.get(a + 1)]) + 1;
+        moves[uncoor.get(a)][uncoor.get(a + 1)] = moves[uncoor.get(a)][uncoor.get(a + 1)] + 1;
       }
       return true;
     }
