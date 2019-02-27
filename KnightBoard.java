@@ -150,7 +150,7 @@ public class KnightBoard {
         idxf = a;
       }
     }
-
+    return idxf;
   }
 
   public boolean solve(int startingRow, int startingCol) {
@@ -196,6 +196,24 @@ public class KnightBoard {
 	return true;
       }
       removeKnight(staRow, staCol);
+    }
+    return false;
+  }
+
+  public boolean solveO(int r, int c, int level) {
+    if (level == ((board.length * board[0].length) + 1)) {
+      return true;
+    }
+    if ((r >= board.length) || (c >= board[0].length) || (r < 0) || (c < 0)) {
+      return false;
+    }
+    findCoor(r, c);
+    int index = ogmIndex();
+    if (placeKnight(r, c, level)) {
+      if (solveH(coor.get(index), coor.get(index + 1), level + 1)) {
+	return true;
+      }
+      removeKnight(r, c);
     }
     return false;
   }
